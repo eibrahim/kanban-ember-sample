@@ -1,0 +1,31 @@
+.kb-board {
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+    padding: 5px;
+    .kb-columns {
+        display: flex;
+        background-color: red;
+        padding: 5px;
+        overflow-x: scroll;
+        .kb-column {
+            padding: 5px;
+            margin: 2px;
+            width: 100%;
+            background-color: green;
+            .kb-cards {
+                display: flex;
+                flex-direction: column;
+                .kb-card {
+                    height: 100%;
+                    border: 1px solid white;
+                    padding: 2px;
+                    margin: 2px;
+                }
+            }
+        }
+    }
+    &.hidden {
+        display: none;
+    }
+}

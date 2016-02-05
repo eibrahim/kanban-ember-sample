@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'kanban',
+    podModulePrefix: 'kanban/pods',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',

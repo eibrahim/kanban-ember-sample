@@ -1,0 +1,9 @@
+
+<h2>{{board.name}}</h2>
+<a href="" {{action 'addColumn'}}>Add Column</a>
+{{kb-delete-button click=(action 'deleteBoard')}}
+<div class="kb-columns">
+  {{#each board.columns as |column|}}
+    {{kb-column column=column cardModel=cardModel}}
+  {{/each}}
+</div>
