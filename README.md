@@ -44,10 +44,10 @@ Make use of the many generators for code, try `ember help generate` for more det
 Specify what it takes to deploy your app.
 
 ## Todos
-- [ ] delete items
+- [x] delete items
+- [x] add drag and drop
 - [ ] add board header
 - [ ] add column header
 - [ ] figure out a way to yield headers
-- [ ] add drag and drop
 - [ ] improve styling
 
