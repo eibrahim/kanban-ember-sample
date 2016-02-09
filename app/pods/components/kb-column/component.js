@@ -74,9 +74,8 @@ default Ember.Component.extend({
           var newColumn = this.get('column');
           newColumn.get('cards').then(newCards => {
             newCards.pushObject(card);
-            card.set('column', newColumn);
             newColumn.save().then(() => {
-              this.set('column', newColumn);
+              newColumn.reload(); // for some reason if i take this out newly created columns disappear after drag and drop
               resolve();
             });
           });
@@ -101,10 +100,10 @@ default Ember.Component.extend({
           var max = cards.length ? cards.mapBy('order').sort().reverse()[0] + 1 : 1;
           var card = this.get('store').createRecord(this.get('cardModel'), {
             name: `Card ${this.get('column.cards.length')+1}`,
-            order: max
+            order: max,
           });
           this.get('column.cards').pushObject(card);
-          card.save().then(this.get('column').save());
+          this.get('column').save();
 
         })
       }

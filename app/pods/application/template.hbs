@@ -2,7 +2,7 @@
 <button {{action 'createBoard'}}>Create Board</button>
 <ul>
   {{#each boards as |board|}}
-    <li>{{board.name}} ({{board.columns.length}})<a href='' {{action 'viewBoard' board}}>view</a> </li>
+    <li>{{board.name}} ({{board.columns.length}})<a href='' {{action 'viewBoard' board}}>view</a>Columns Count: {{board.columns.length}} </li>
   {{/each}}
 </ul>
 {{kb-board board=currentBoard columnModel='column' cardModel='card'}}

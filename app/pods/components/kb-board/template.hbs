@@ -2,6 +2,7 @@
 <h2>{{board.name}}</h2>
 <a href="" {{action 'addColumn'}}>Add Column</a>
 {{kb-delete-button click=(action 'deleteBoard')}}
+<h3>Columns Count: {{board.columns.length}}</h3>
 <div class="kb-columns">
   {{#each board.columns as |column|}}
     {{kb-column column=column cardModel=cardModel}}

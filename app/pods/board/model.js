@@ -7,7 +7,13 @@ default DS.Model.extend({
 
   destroyRecord() {
     this.get('columns').invoke('destroyRecord');
-    this._super(...arguments);
+    return this._super(...arguments);
+  },
+
+
+  save() {
+    this.get('columns').invoke('save');
+    return this._super(...arguments);
   }
 });
 

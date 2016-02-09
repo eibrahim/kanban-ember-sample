@@ -8,7 +8,7 @@ default DS.Model.extend({
   cards: DS.hasMany('card'),
 
   //sortedCards: Ember.computed.sort('cards', 'order'),
-  sortedCards:function(){
+  sortedCards: function() {
     return this.get('cards').sortBy('order');
   }.property('cards.[].order'),
 
@@ -16,7 +16,12 @@ default DS.Model.extend({
 
   destroyRecord() {
     this.get('cards').invoke('destroyRecord');
-    this._super(...arguments);
+    return this._super(...arguments);
+  },
+
+  save() {
+    this.get('cards').invoke('save');
+    return this._super(...arguments);
   }
 });
 
