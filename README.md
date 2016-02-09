@@ -46,6 +46,8 @@ Specify what it takes to deploy your app.
 ## Todos
 - [x] delete items
 - [x] add drag and drop
+- [ ] sort cards
+- [ ] sort columns
 - [ ] add board header
 - [ ] add column header
 - [ ] figure out a way to yield headers

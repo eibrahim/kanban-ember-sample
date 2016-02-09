@@ -13,6 +13,7 @@
             min-width: 200px;
             background-color: green;
             .kb-cards {
+                min-height: 200px;
                 display: flex;
                 flex-direction: column;
                 .kb-card {
@@ -27,4 +28,7 @@
     &.hidden {
         display: none;
     }
+}
+.dragging {
+    background-color: blue;
 }
