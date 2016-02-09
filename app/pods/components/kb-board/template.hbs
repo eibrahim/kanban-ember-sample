@@ -4,7 +4,7 @@
 {{kb-delete-button click=(action 'deleteBoard')}}
 <h3>Columns Count: {{board.columns.length}}</h3>
 <div class="kb-columns">
-  {{#each board.columns as |column|}}
+  {{#each board.sortedColumns as |column|}}
     {{kb-column column=column cardModel=cardModel}}
   {{/each}}
 </div>

@@ -18,11 +18,13 @@ default Ember.Component.extend({
 
       addColumn() {
         var board = this.get('board');
-        var newColumn = this.get('store').createRecord(this.get('columnModel'), {
-          name: `Column ${this.get('board.columns.length') + 1}`,
-        });
 
         board.get('columns').then(columns => {
+          var max = columns.length ? columns.mapBy('order').sort().reverse()[0] + 1 : 1;
+          var newColumn = this.get('store').createRecord(this.get('columnModel'), {
+            name: `Column ${this.get('board.columns.length') + 1}`,
+            order: max,
+          });
           columns.pushObject(newColumn);
           board.save();
         });
