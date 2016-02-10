@@ -12,7 +12,11 @@ default Ember.Component.extend(DragDrop, {
   }.property('column.id'),
 
   didInsertElement() {
-    this.makeSortable('column', 'card', 'column', 'cards', '.column-sortable', '.column-sortable');
+    this.makeSortable({
+      parentModel: 'column',
+      childModel: 'card',
+      connected: true
+    });
   },
 
 
