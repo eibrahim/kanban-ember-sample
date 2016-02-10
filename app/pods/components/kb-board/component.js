@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
+import DragDrop from '../../../mixins/dragdrop';
+
 export
-default Ember.Component.extend({
+default Ember.Component.extend(DragDrop, {
   store: Ember.inject.service('store'),
   classNames: ['kb-board'],
   classNameBindings: ['hidden'],
@@ -9,6 +11,10 @@ default Ember.Component.extend({
   hidden: function() {
     return !this.get('board');
   }.property('board'),
+
+  didInsertElement() {
+    this.makeSortable('board', 'column', 'board', 'columns', '.board-sortable');
+  },
 
   actions: {
 

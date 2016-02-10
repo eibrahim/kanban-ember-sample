@@ -1,88 +1,20 @@
 import Ember from 'ember';
+import DragDrop from '../../../mixins/dragdrop';
 
 export
-default Ember.Component.extend({
-  classNames: ['kb-column'],
+default Ember.Component.extend(DragDrop, {
   store: Ember.inject.service(),
+  classNames: ['kb-column', 'item'],
+
+  attributeBindings: ['data-id'],
+  'data-id': function() {
+    return this.get('column.id');
+  }.property('column.id'),
 
   didInsertElement() {
-    var self = this;
-    var isReceiving = false;
-    this.$('.column-sortable').sortable({
-      connectWith: '.column-sortable',
-      receive(event, ui) {
-        isReceiving = true;
-        var receivedCardId = ui.item.data('id');
-        self.receiveCard(receivedCardId).then(() => {
-          self.updateIndexes.call(self);
-        });
-      },
-      remove(event, ui) {
-        var removedCardId = ui.item.data('id');
-        self.removeCard(removedCardId).then(() => {
-          self.updateIndexes.call(self);
-        });
-      },
-      update(event, ui) {
-        if (isReceiving) {
-          isReceiving = false;
-        } else {
-          self.updateIndexes.call(self);
-        }
-      }
-    });
+    this.makeSortable('column', 'card', 'column', 'cards', '.column-sortable', '.column-sortable');
   },
 
-  updateIndexes() {
-    this.beginPropertyChanges();
-    var cards = this.get('column.cards');
-    this.$('.item').each(function(index) {
-      var id = $(this).data('id');
-      var card = cards.findBy('id', id);
-      if (card) {
-        card.set('order', index)
-      };
-    });
-    cards.invoke('save');
-    this.endPropertyChanges();
-  },
-
-  removeCard(cardId) {
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      if (!cardId) {
-        resolve();
-      } else {
-        this.get('store').find('card', cardId).then(card => {
-          var oldCol = this.get('column');
-          oldCol.get('cards').then((oldCards) => {
-            oldCards.removeObject(card);
-            oldCol.save().then(() => {
-              resolve();
-            });
-          });
-        });
-      }
-    });
-  },
-
-  receiveCard(cardId) {
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      if (!cardId) {
-        resolve();
-      } else {
-        this.get('store').find('card', cardId).then(card => {
-          var newColumn = this.get('column');
-          newColumn.get('cards').then(newCards => {
-            newCards.pushObject(card);
-            newColumn.save().then(() => {
-              newColumn.reload(); // for some reason if i take this out newly created columns disappear after drag and drop
-              resolve();
-            });
-          });
-        });
-      }
-    });
-  },
 
   actions: {
     deleteColumn() {

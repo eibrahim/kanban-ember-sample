@@ -3,7 +3,7 @@
 <a href="" {{action 'addColumn'}}>Add Column</a>
 {{kb-delete-button click=(action 'deleteBoard')}}
 <h3>Columns Count: {{board.columns.length}}</h3>
-<div class="kb-columns">
+<div class="kb-columns board-sortable">
   {{#each board.sortedColumns as |column|}}
     {{kb-column column=column cardModel=cardModel}}
   {{/each}}
